@@ -6,6 +6,8 @@ import * as math from 'mathjs';
   class App extends React.Component {
     constructor(props) {
       super(props);
+      this.state_ = {isToggleOn: true};
+
       this.handleClick = this.handleClick.bind(this);
     }
     state = {
@@ -13,12 +15,14 @@ import * as math from 'mathjs';
       num2:'',
       answer:0,
       operation:null,
+      operation_status:null,
       numbertoappearonscreen:0,
-      value:''
+      value:'',
+      isToggleOn: false
      // operation_button_clicked:''
   };
 
-
+  
   // btnoperation(){
   //   // if(document.getElementById('calculation').click){
   //   //   alert("button was clicked");
@@ -27,14 +31,17 @@ import * as math from 'mathjs';
   //   // }
   //  }​
   
+  //check
 
    AddNumber(e) {
+    console.log(this.state);
      console.log(e.target.value);
-    let operation_button_clicked = this.check_operation_click();
-    
-    
+     e.preventDefault();
+    //let operation_button_clicked = this.check_operation_click();
+    this.check_operation_click();
+    console.log(this.state.operation_status);
     //check if the operation btns have been clicked
-    if (this.state.operation === null) {
+    if (this.state.operation_status === false) {
       let numbersAsString =+ this.state.num1+`${e.target.value}`;
       this.setState({
         num1:  numbersAsString
@@ -56,40 +63,25 @@ import * as math from 'mathjs';
            });
            this.setState({value: this.state.numbertoappearonscreen})
     }
-    // if (operation_button_clicked === false) {
-    //   let numbersAsString =+ this.state.num1+`${e.target.value}`;
-    //   this.setState({
-    //     num1:  numbersAsString
-    //       });
-    //       this.setState({
-    //      numbertoappearonscreen: this.state.num1
-    //        });
-    //     this.setState({value: this.state.numbertoappearonscreen})
-    // } else {
-    //   let numbersAsString =+ this.state.num2+`${e.target.value}`;
-    //   this.setState({
-    //     numbertoappearonscreen: 0
-    //       });
-    //   this.setState({
-    //     num2: numbersAsString
-    //       });
-    //        this.setState({
-    //          numbertoappearonscreen: this.state.num2
-    //        });
-    //        this.setState({value: this.state.numbertoappearonscreen})
-    // }
-
-    console.log('the operation button were given a '+operation_button_clicked);
-
+  
    console.log(this.state.numbertoappearonscreen);
+   console.log(this.state.numbertoappearonscreen);
+
   }
   
   check_operation_click(){
     if (document.getElementById('calculation').click == true) {
-      return true;     
+       this.setState({
+        operation_status:true
+      });
+     // return true;     
     } else{
-      return false;
+       this.setState({
+        operation_status:false
+      });
+      // return false;
     }
+    
   }
 
 
@@ -102,16 +94,62 @@ import * as math from 'mathjs';
    this.setState({
     operation: e.target.value
       });
-      console.log(this.state.operation);
+      this.setState({
+        operation_status:true
+      });
+     
+      // console.log(this.state.operation);
+      e.preventDefault();
+
  }
 
  handleClick(event) {
   
   //event.preventDefault();
-//const value = event.target.value;
-this.setState({value: this.state.numbertoappearonscreen})
-//console.log(value);
+let result =+ 0+ event.target.value;
+this.setState({value: result});
+console.log(this.state.value);
 }
+
+calculate(e){
+  console.log(e);
+  console.log(this.state.num1);
+  console.log(this.state.num2);
+ switch (this.state.operation) {
+   case "+":
+    let result = math.add(this.state.num1,this.state.num2);
+    console.log(result);
+    this.setState({
+      numbertoappearonscreen: result
+    });
+    this.setState({value: this.state.numbertoappearonscreen});
+     break;
+  case "-":
+    let subtract = math.subtract(this.state.num1,this.state.num2);
+    this.setState({value: subtract});
+     break;
+  case "*":
+    let multiply = math.multiply(this.state.num1,this.state.num2);
+    this.setState({value: multiply});
+      break;
+  case "/":
+    let divide = math.divide(this.state.num1,this.state.num2);
+    this.setState({value: divide});
+
+        break;
+ 
+   default:
+     break;
+ }
+ e.preventDefault();
+}
+/*
+operation_status(e){
+  this.setState({
+    operation: e.target.value
+      });
+
+}*/
   render(){
   return (
     <div className="App">
@@ -128,6 +166,7 @@ this.setState({value: this.state.numbertoappearonscreen})
   </div>
   <div class="row">
     <div class="col-9">
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='1333'>33</button>
     <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='1'>1</button>
     <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='2'>2</button>
     <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='3'>3</button>
@@ -143,11 +182,11 @@ this.setState({value: this.state.numbertoappearonscreen})
     
     </div>
     <div class="col-3">
-    <button class="col-6" id='calculation' onClick={(e) => this.operation(e)} value='+'>+</button>
-    <button class="col-6" id='calculation' onClick={(e) => this.operation(e)} value='-'>-</button>
-    <button class="col-md-6" id='calculation' onClick={(e) => this.operation(e)} value='*'>*</button>
-    <button class="col-md-6" id='calculation' onClick={(e) => this.handleClick(e)} value='/'>/</button>
-    <button class="col-md-6" id='calculate' onClick={(e) => this.calculate}>=</button>
+    <button class="col-6" id='calculation' onClick={(e) => this.operation_status(e)} onClick={(e) => this.operation(e)} value="+">+</button>
+    <button class="col-6" id='calculation' onClick={(e) => this.operation_status(e)} onClick={(e) => this.operation(e)} value="-">-</button>
+    <button class="col-md-6" id='calculation' onClick={(e) => this.operation_status(e)} onClick={(e) => this.operation(e)} value="*">*</button>
+    <button class="col-md-6" id='calculation'  onClick={(e) => this.operation_status(e)} onClick={(e) => this.operation(e)} value="/">/</button>
+    <button class="col-md-6" id='calculate' onClick={(e) => this.calculate(e)}>=</button>
     </div>
     {/* <div class="col">
       3 of 3
