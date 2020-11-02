@@ -195,29 +195,27 @@ operation_status(e){
     
   </div>
   <div class="row">
-    <div class="col-9">
+    <div class="col-12">
     {/* <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='1333'>33</button> */}
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='1'>1</button>
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='2'>2</button>
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='3'>3</button>
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='4'>4</button>
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='5'>5</button>
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='6'>6</button>
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='7'>7</button>
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='8'>8</button>
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='9'>9</button>
-    <button class="col-md-6" onClick={(e) => this.handleClick(e)} value='0'>0</button>
-    <button class="col-md-6" onClick={(e) => this.clear(e)} >CE</button>
-    
-    
-    </div>
-    <div class="col-3">
-    <button class="col-6" id='calculation'  onClick={(e) => this.handleClick(e)} value="+">+</button>
-    <button class="col-6" id='calculation'  onClick={(e) => this.handleClick(e)} value="-">-</button>
-    <button class="col-md-6" id='calculation'  onClick={(e) => this.handleClick(e)} value="*">*</button>
+    <button class="col-md-3" onClick={(e) => this.handleClick(e)} value='7'>7</button>
+    <button class="col-md-3" onClick={(e) => this.handleClick(e)} value='8'>8</button>
+    <button class="col-md-3" onClick={(e) => this.handleClick(e)} value='9'>9</button>
+    <button class="col-md-3" id='calculation'  onClick={(e) => this.handleClick(e)} value="*">X</button>
+    <button class="col-md-3" onClick={(e) => this.handleClick(e)} value='4'>4</button>
+    <button class="col-md-3" onClick={(e) => this.handleClick(e)} value='5'>5</button>
+    <button class="col-md-3" onClick={(e) => this.handleClick(e)} value='6'>6</button>
+    <button class="col-3" id='calculation'  onClick={(e) => this.handleClick(e)} value="-">-</button>
+    <button class="col-md-3" onClick={(e) => this.handleClick(e)} value='7'>1</button>
+    <button class="col-md-3" onClick={(e) => this.handleClick(e)} value='8'>2</button>
+    <button class="col-md-3" onClick={(e) => this.handleClick(e)} value='9'>3</button>
+    <button class="col-3" id='calculation'  onClick={(e) => this.handleClick(e)} value="+">+</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='0'>0</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='.'>.</button>
+    <button class="col-md-4" onClick={(e) => this.clear(e)} >CE</button>
     <button class="col-md-6" id='calculation'   onClick={(e) => this.handleClick(e)} value="/">/</button>
     <button class="col-md-6" id='calculate' onClick={(e) => this.calculate(e)}>=</button>
     </div>
+
     {/* <div class="col">
       3 of 3
     </div> */}
