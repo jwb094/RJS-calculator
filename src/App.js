@@ -41,7 +41,7 @@ import * as math from 'mathjs';
     this.check_operation_click();
     console.log(this.state.operation_status);
     //check if the operation btns have been clicked
-    if (this.state.operation_status === false) {
+    if (this.state.operation_status == false) {
       let numbersAsString =+ this.state.num1+`${e.target.value}`;
       this.setState({
         num1:  numbersAsString
@@ -103,44 +103,74 @@ import * as math from 'mathjs';
 
  }
 
- handleClick(event) {
-  
-  //event.preventDefault();
-let result =+ 0+ event.target.value;
-this.setState({value: result});
-console.log(this.state.value);
+ handleClick(e) {
+  e.preventDefault();
+  let num  = `${e.target.value}`;
+  this.setState({
+    value: this.state.value += num
+  });
+  let numbersAsString =+ `${e.target.value}`;
+  //console.log(numbersAsString );
+console.log(this.state.numbertoappearonscreen);
 }
 
-calculate(e){
-  console.log(e);
-  console.log(this.state.num1);
-  console.log(this.state.num2);
- switch (this.state.operation) {
-   case "+":
-    let result = math.add(this.state.num1,this.state.num2);
-    console.log(result);
-    this.setState({
-      numbertoappearonscreen: result
-    });
-    this.setState({value: this.state.numbertoappearonscreen});
-     break;
-  case "-":
-    let subtract = math.subtract(this.state.num1,this.state.num2);
-    this.setState({value: subtract});
-     break;
-  case "*":
-    let multiply = math.multiply(this.state.num1,this.state.num2);
-    this.setState({value: multiply});
-      break;
-  case "/":
-    let divide = math.divide(this.state.num1,this.state.num2);
-    this.setState({value: divide});
+//  handleClick(e) {
+//   e.preventDefault();
+//   let numbersAsString =+ this.state.num1+`${e.target.value}`;
+//   console.log(numbersAsString);
+//   this.setState({
+//     num1:  numbersAsString
+//       });
+//       this.setState({
+//      numbertoappearonscreen: this.state.num1
+//        });
+//     this.setState({value: this.state.numbertoappearonscreen})
+//   //event.preventDefault();
+// // let result =+ 0+ event.target.value;
+// // this.setState({value: result});
+// console.log(this.state.num1);
+// }
 
-        break;
+clear(e){
+  this.setState({
+    value: ''
+  });
+}
+
+
+calculate(e){
+  this.setState({
+    value: math.evaluate(this.state.value)     
+  });
+//   console.log(e);
+//   console.log(this.state.num1);
+//   console.log(this.state.num2);
+//  switch (this.state.operation) {
+//    case "+":
+//     let result = math.add(this.state.num1,this.state.num2);
+//     console.log(result);
+//     this.setState({
+//       numbertoappearonscreen: result
+//     });
+//     this.setState({value: this.state.numbertoappearonscreen});
+//      break;
+//   case "-":
+//     let subtract = math.subtract(this.state.num1,this.state.num2);
+//     this.setState({value: subtract});
+//      break;
+//   case "*":
+//     let multiply = math.multiply(this.state.num1,this.state.num2);
+//     this.setState({value: multiply});
+//       break;
+//   case "/":
+//     let divide = math.divide(this.state.num1,this.state.num2);
+//     this.setState({value: divide});
+
+//         break;
  
-   default:
-     break;
- }
+//    default:
+//      break;
+//  }
  e.preventDefault();
 }
 /*
@@ -166,26 +196,26 @@ operation_status(e){
   </div>
   <div class="row">
     <div class="col-9">
-    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='1333'>33</button>
-    <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='1'>1</button>
-    <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='2'>2</button>
-    <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='3'>3</button>
-    <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='4'>4</button>
-    <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='5'>5</button>
-    <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='6'>6</button>
-    <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='7'>7</button>
-    <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='8'>8</button>
-    <button class="col-md-4" onClick={(e) => this.AddNumber(e)} value='9'>9</button>
-    <button class="col-md-6" onClick={(e) => this.AddNumber(e)} value='0'>0</button>
-    <button class="col-md-6" onClick={(e) => this.AddNumber(e)} >CE</button>
+    {/* <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='1333'>33</button> */}
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='1'>1</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='2'>2</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='3'>3</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='4'>4</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='5'>5</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='6'>6</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='7'>7</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='8'>8</button>
+    <button class="col-md-4" onClick={(e) => this.handleClick(e)} value='9'>9</button>
+    <button class="col-md-6" onClick={(e) => this.handleClick(e)} value='0'>0</button>
+    <button class="col-md-6" onClick={(e) => this.clear(e)} >CE</button>
     
     
     </div>
     <div class="col-3">
-    <button class="col-6" id='calculation' onClick={(e) => this.operation_status(e)} onClick={(e) => this.operation(e)} value="+">+</button>
-    <button class="col-6" id='calculation' onClick={(e) => this.operation_status(e)} onClick={(e) => this.operation(e)} value="-">-</button>
-    <button class="col-md-6" id='calculation' onClick={(e) => this.operation_status(e)} onClick={(e) => this.operation(e)} value="*">*</button>
-    <button class="col-md-6" id='calculation'  onClick={(e) => this.operation_status(e)} onClick={(e) => this.operation(e)} value="/">/</button>
+    <button class="col-6" id='calculation'  onClick={(e) => this.handleClick(e)} value="+">+</button>
+    <button class="col-6" id='calculation'  onClick={(e) => this.handleClick(e)} value="-">-</button>
+    <button class="col-md-6" id='calculation'  onClick={(e) => this.handleClick(e)} value="*">*</button>
+    <button class="col-md-6" id='calculation'   onClick={(e) => this.handleClick(e)} value="/">/</button>
     <button class="col-md-6" id='calculate' onClick={(e) => this.calculate(e)}>=</button>
     </div>
     {/* <div class="col">
